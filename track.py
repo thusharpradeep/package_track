@@ -161,24 +161,24 @@ def send_telegram(changes, new_state):
         return
         
     changes_str = ", ".join(changes)
-    msg = f"""📦 *Delhivery Update*
-*AWB:* `{AWB_NUMBER}`
+    msg = f"""📦 <b>Delhivery Update</b>
+<b>AWB:</b> <code>{AWB_NUMBER}</code>
 
-*Changes:* {changes_str}
+<b>Changes:</b> {changes_str}
 
-*Status:* {new_state.get('status')}
-*Instructions:* {new_state.get('instructions')}
-*Location:* {new_state.get('latestCity')} ({new_state.get('latestHub')})
-*Remark:* {new_state.get('latestRemark')}
-*Timestamp:* {new_state.get('statusDateTime')}
-*Expected Delivery:* {new_state.get('deliveryDate_v1') or new_state.get('deliveryDate')}
+<b>Status:</b> {new_state.get('status')}
+<b>Instructions:</b> {new_state.get('instructions')}
+<b>Location:</b> {new_state.get('latestCity')} ({new_state.get('latestHub')})
+<b>Remark:</b> {new_state.get('latestRemark')}
+<b>Timestamp:</b> {new_state.get('statusDateTime')}
+<b>Expected Delivery:</b> {new_state.get('deliveryDate_v1') or new_state.get('deliveryDate')}
 """
     
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": msg,
-        "parse_mode": "Markdown"
+        "parse_mode": "HTML"
     }
     
     try:
@@ -193,24 +193,24 @@ def send_startup_telegram(new_state):
         print("Missing Telegram configuration, skipping startup Telegram.")
         return
         
-    msg = f"""🟢 *Delhivery Tracker Started*
-*AWB:* `{AWB_NUMBER}`
+    msg = f"""🟢 <b>Delhivery Tracker Started</b>
+<b>AWB:</b> <code>{AWB_NUMBER}</code>
 
 The tracker is working, and currently at {new_state.get('latestCity')}.
 
-*Status:* {new_state.get('status')}
-*Instructions:* {new_state.get('instructions')}
-*Location:* {new_state.get('latestCity')} ({new_state.get('latestHub')})
-*Remark:* {new_state.get('latestRemark')}
-*Timestamp:* {new_state.get('statusDateTime')}
-*Expected Delivery:* {new_state.get('deliveryDate_v1') or new_state.get('deliveryDate')}
+<b>Status:</b> {new_state.get('status')}
+<b>Instructions:</b> {new_state.get('instructions')}
+<b>Location:</b> {new_state.get('latestCity')} ({new_state.get('latestHub')})
+<b>Remark:</b> {new_state.get('latestRemark')}
+<b>Timestamp:</b> {new_state.get('statusDateTime')}
+<b>Expected Delivery:</b> {new_state.get('deliveryDate_v1') or new_state.get('deliveryDate')}
 """
     
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": msg,
-        "parse_mode": "Markdown"
+        "parse_mode": "HTML"
     }
     
     try:
