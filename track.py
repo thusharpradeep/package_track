@@ -115,7 +115,7 @@ def send_startup_email(new_state):
         return
 
     subject = f"Delhivery Tracker: Started for {AWB_NUMBER}"
-    body = f"""The Delhivery package tracker is up and running!
+    body = f"""The Delhivery package tracker is working, and currently at {new_state.get('latestScanLocation')}!
 
 AWB Number: {AWB_NUMBER}
 
@@ -170,6 +170,34 @@ def send_telegram(changes, new_state):
     except Exception as e:
         print(f"Failed to send Telegram message: {e}")
 
+def send_startup_telegram(new_state):
+    if not all([TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID]):
+        print("Missing Telegram configuration, skipping startup Telegram.")
+        return
+        
+    msg = f"""🟢 *Delhivery Tracker Started*
+*AWB:* `{AWB_NUMBER}`
+
+The tracker is working, and currently at {new_state.get('latestScanLocation')}.
+
+*Status:* {new_state.get('status')}
+*Instructions:* {new_state.get('instructions')}
+*Timestamp:* {new_state.get('statusDateTime')}
+*Expected Delivery:* {new_state.get('deliveryDate_v1') or new_state.get('deliveryDate')}
+"""
+    
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": msg,
+        "parse_mode": "Markdown"
+    }
+    
+    try:
+        requests.post(url, json=payload)
+    except Exception as e:
+        print(f"Failed to send startup Telegram message: {e}")
+
 def main():
     data = get_tracking_data()
     if not data:
@@ -186,8 +214,9 @@ def main():
             send_email(changes, current_state)
             send_telegram(changes, current_state)
     else:
-        print("First run. Saving state, sending startup email.")
+        print("First run. Saving state, sending startup alerts (email + telegram).")
         send_startup_email(current_state)
+        send_startup_telegram(current_state)
         
     with open(STATE_FILE, "w") as f:
         json.dump(current_state, f, indent=4)
