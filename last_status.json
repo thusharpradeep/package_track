@@ -1,7 +1,7 @@
 {
     "status": "IN_TRANSIT",
-    "statusDateTime": "2026-06-06T09:13:04.815000",
-    "instructions": "Shipment Received at Facility",
+    "statusDateTime": "2026-06-06T17:31:40.243000",
+    "instructions": "Bag Added To Trip",
     "destination": "Tirur",
     "deliveryDate_v1": "09 Jun - 12 Jun",
     "deliveryDate": "09 Jun 2026, 09:00-19:00",
@@ -9,5 +9,5 @@
     "trackingStatesLength": 1,
     "latestCity": "Sriperumbudur",
     "latestHub": "Chennai_Sriperumbudur_GW (Tamil Nadu)",
-    "latestRemark": "Package arrived at our Sriperumbudur facility"
+    "latestRemark": "Package loaded and moving to a facility near you | Coimbatore"
 }
