@@ -44,9 +44,18 @@ def extract_snapshot(data):
     tracking_states = data.get("trackingStates", [])
     
     # Typically latest scan is at index 0, or just extract the first available location
-    latest_location = "Unknown"
+    latest_city = "Unknown"
+    latest_hub = "Unknown"
+    latest_remark = "Unknown"
+    
     if tracking_states and len(tracking_states) > 0:
-        latest_location = tracking_states[0].get("location", "Unknown")
+        latest_state = tracking_states[0]
+        scans = latest_state.get("scans", [])
+        if scans and len(scans) > 0:
+            latest_scan = scans[0]
+            latest_city = latest_scan.get("cityLocation", "Unknown")
+            latest_hub = latest_scan.get("scannedLocation", "Unknown")
+            latest_remark = latest_scan.get("scanNslRemark", "Unknown")
         
     return {
         "status": status_info.get("status"),
@@ -57,7 +66,9 @@ def extract_snapshot(data):
         "deliveryDate": data.get("deliveryDate"),
         "hqStatus": data.get("hqStatus"),
         "trackingStatesLength": len(tracking_states),
-        "latestScanLocation": latest_location
+        "latestCity": latest_city,
+        "latestHub": latest_hub,
+        "latestRemark": latest_remark
     }
 
 def detect_changes(old_state, new_state):
@@ -74,6 +85,8 @@ def detect_changes(old_state, new_state):
         changes.append("High level status updated")
     if old_state.get("trackingStatesLength") != new_state.get("trackingStatesLength"):
         changes.append("New scan added")
+    if old_state.get("latestRemark") != new_state.get("latestRemark"):
+        changes.append("New remark (scanNslRemark) added")
         
     return changes
 
@@ -90,7 +103,8 @@ What changed:
 
 New Status: {new_state.get('status')}
 Instructions: {new_state.get('instructions')}
-Location from latest scan: {new_state.get('latestScanLocation')}
+Location: {new_state.get('latestCity')} ({new_state.get('latestHub')})
+Remark: {new_state.get('latestRemark')}
 Status Timestamp: {new_state.get('statusDateTime')}
 Expected Delivery Range: {new_state.get('deliveryDate_v1')}
 Specific Delivery Date: {new_state.get('deliveryDate')}
@@ -115,13 +129,14 @@ def send_startup_email(new_state):
         return
 
     subject = f"Delhivery Tracker: Started for {AWB_NUMBER}"
-    body = f"""The Delhivery package tracker is working, and currently at {new_state.get('latestScanLocation')}!
+    body = f"""The Delhivery package tracker is working, and currently at {new_state.get('latestCity')}!
 
 AWB Number: {AWB_NUMBER}
 
 Current Status: {new_state.get('status')}
 Instructions: {new_state.get('instructions')}
-Location from latest scan: {new_state.get('latestScanLocation')}
+Location: {new_state.get('latestCity')} ({new_state.get('latestHub')})
+Remark: {new_state.get('latestRemark')}
 Status Timestamp: {new_state.get('statusDateTime')}
 Expected Delivery Range: {new_state.get('deliveryDate_v1')}
 Specific Delivery Date: {new_state.get('deliveryDate')}
@@ -153,7 +168,8 @@ def send_telegram(changes, new_state):
 
 *Status:* {new_state.get('status')}
 *Instructions:* {new_state.get('instructions')}
-*Location:* {new_state.get('latestScanLocation')}
+*Location:* {new_state.get('latestCity')} ({new_state.get('latestHub')})
+*Remark:* {new_state.get('latestRemark')}
 *Timestamp:* {new_state.get('statusDateTime')}
 *Expected Delivery:* {new_state.get('deliveryDate_v1') or new_state.get('deliveryDate')}
 """
@@ -166,7 +182,9 @@ def send_telegram(changes, new_state):
     }
     
     try:
-        requests.post(url, json=payload)
+        response = requests.post(url, json=payload)
+        if response.status_code != 200:
+            print(f"Telegram API Error: {response.text}")
     except Exception as e:
         print(f"Failed to send Telegram message: {e}")
 
@@ -178,10 +196,12 @@ def send_startup_telegram(new_state):
     msg = f"""🟢 *Delhivery Tracker Started*
 *AWB:* `{AWB_NUMBER}`
 
-The tracker is working, and currently at {new_state.get('latestScanLocation')}.
+The tracker is working, and currently at {new_state.get('latestCity')}.
 
 *Status:* {new_state.get('status')}
 *Instructions:* {new_state.get('instructions')}
+*Location:* {new_state.get('latestCity')} ({new_state.get('latestHub')})
+*Remark:* {new_state.get('latestRemark')}
 *Timestamp:* {new_state.get('statusDateTime')}
 *Expected Delivery:* {new_state.get('deliveryDate_v1') or new_state.get('deliveryDate')}
 """
@@ -194,7 +214,9 @@ The tracker is working, and currently at {new_state.get('latestScanLocation')}.
     }
     
     try:
-        requests.post(url, json=payload)
+        response = requests.post(url, json=payload)
+        if response.status_code != 200:
+            print(f"Telegram API Error (Startup): {response.text}")
     except Exception as e:
         print(f"Failed to send startup Telegram message: {e}")
 
