@@ -1,7 +1,7 @@
 {
-    "status": "AUTOMATIC WORKFLOW WORKING - TEST",
+    "status": "IN_TRANSIT",
     "statusDateTime": "2026-06-06T09:13:04.815000",
-    "instructions": "Testing 2nd action execution...",
+    "instructions": "Shipment Received at Facility",
     "destination": "Tirur",
     "deliveryDate_v1": "09 Jun - 12 Jun",
     "deliveryDate": "09 Jun 2026, 09:00-19:00",
