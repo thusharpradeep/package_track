@@ -1,7 +1,7 @@
 {
     "status": "IN_TRANSIT",
-    "statusDateTime": "2026-06-07T19:16:28.426000",
-    "instructions": "Bag Received at Facility",
+    "statusDateTime": "2026-06-08T04:50:11.389000",
+    "instructions": "Bag Added To Trip",
     "destination": "Tirur",
     "deliveryDate_v1": "09 Jun - 12 Jun",
     "deliveryDate": "09 Jun 2026, 09:00-19:00",
@@ -9,5 +9,5 @@
     "trackingStatesLength": 1,
     "latestCity": "Coimbatore",
     "latestHub": "Coimbatore_Pudhupalayam_GW (Tamil Nadu)",
-    "latestRemark": "Package arrived at our Coimbatore facility"
+    "latestRemark": "Package loaded and moving to a facility near you | Kozhikode"
 }
