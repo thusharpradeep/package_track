@@ -1,13 +1,13 @@
 {
     "status": "IN_TRANSIT",
-    "statusDateTime": "2026-06-07T00:47:36.243000",
-    "instructions": "Vehicle Departed",
+    "statusDateTime": "2026-06-07T10:46:13.813000",
+    "instructions": "Trip Arrived",
     "destination": "Tirur",
     "deliveryDate_v1": "09 Jun - 12 Jun",
     "deliveryDate": "09 Jun 2026, 09:00-19:00",
     "hqStatus": "In Transit",
     "trackingStatesLength": 1,
-    "latestCity": "Sriperumbudur",
-    "latestHub": "Chennai_Sriperumbudur_GW (Tamil Nadu)",
-    "latestRemark": "Package loaded and moving to a facility near you | Coimbatore"
+    "latestCity": "Coimbatore",
+    "latestHub": "Coimbatore_Pudhupalayam_GW (Tamil Nadu)",
+    "latestRemark": "Package arrived at our Coimbatore facility"
 }
