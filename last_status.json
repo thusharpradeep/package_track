@@ -1,13 +1,13 @@
 {
     "status": "IN_TRANSIT",
-    "statusDateTime": "2026-06-08T19:16:46.500000",
-    "instructions": "Bag Received at Facility",
+    "statusDateTime": "2026-06-07T21:52:47.799000",
+    "instructions": "Bag Removed",
     "destination": "Tirur",
-    "deliveryDate_v1": "09 Jun - 12 Jun",
-    "deliveryDate": "09 Jun 2026, 09:00-19:00",
+    "deliveryDate_v1": "10 Jun - 13 Jun",
+    "deliveryDate": "10 Jun 2026, 09:00-19:00",
     "hqStatus": "In Transit",
     "trackingStatesLength": 1,
-    "latestCity": "Kozhikode",
-    "latestHub": "Kozhikode_Central_H (Kerala)",
-    "latestRemark": "Package arrived at our Kozhikode facility"
+    "latestCity": "Coimbatore",
+    "latestHub": "Coimbatore_Pudhupalayam_GW (Tamil Nadu)",
+    "latestRemark": "Package loaded and moving to a facility near you | Cochin"
 }
