@@ -1,10 +1,14 @@
 import os
 import json
 import requests
+import urllib3
 from bs4 import BeautifulSoup
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+# Suppress SSL warnings
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 EMAIL_TO = os.environ.get("EMAIL_TO")
 EMAIL_FROM = os.environ.get("EMAIL_FROM")
@@ -24,7 +28,7 @@ def fetch_notifications():
     }
 
     try:
-        response = requests.get(URL, headers=headers, timeout=15)
+        response = requests.get(URL, headers=headers, timeout=15, verify=False)
         if response.status_code != 200:
             return None
         
