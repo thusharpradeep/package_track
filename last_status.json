@@ -1,13 +1,13 @@
 {
-    "status": "OUT_DELIVERY",
-    "statusDateTime": "2026-06-11T11:14:29.214000",
-    "instructions": "Out for delivery",
+    "status": "DELIVERED",
+    "statusDateTime": "2026-06-11T17:59:45.002000",
+    "instructions": "Delivered to consignee - Code Verified delivery",
     "destination": "Tirur",
-    "deliveryDate_v1": "Arriving Today",
-    "deliveryDate": "12 Jun 2026",
-    "hqStatus": "Dispatched",
+    "deliveryDate_v1": "Delivered on 11 Jun",
+    "deliveryDate": "11 Jun 2026, Evening",
+    "hqStatus": "Delivered",
     "trackingStatesLength": 1,
     "latestCity": "Tirur",
     "latestHub": "Tirur_Perunthallur_D (Kerala)",
-    "latestRemark": "Our executive S Sidharth is on their way to deliver your package"
+    "latestRemark": "Package delivered successfully after verification"
 }
