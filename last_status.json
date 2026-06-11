@@ -1,13 +1,13 @@
 {
-    "status": "IN_TRANSIT",
-    "statusDateTime": "2026-06-11T04:47:19.708000",
-    "instructions": "Vehicle Departed",
+    "status": "REACHED_DEST_CITY",
+    "statusDateTime": "2026-06-11T06:46:36.474000",
+    "instructions": "Shipment Received at Facility",
     "destination": "Tirur",
     "deliveryDate_v1": "06 Jun - 11 Jun",
     "deliveryDate": "12 Jun 2026",
-    "hqStatus": "In Transit",
+    "hqStatus": "Pending",
     "trackingStatesLength": 1,
-    "latestCity": "Kozhikode",
-    "latestHub": "Kozhikode_Central_H (Kerala)",
-    "latestRemark": "Package loaded and moving to a facility near you | Tirur"
+    "latestCity": "Tirur",
+    "latestHub": "Tirur_Perunthallur_D (Kerala)",
+    "latestRemark": "Package arrived at facility near you - Tirur"
 }
