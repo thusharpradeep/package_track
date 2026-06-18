@@ -2,7 +2,7 @@
     "status": "DELIVERED",
     "statusDateTime": "2026-06-11T17:59:45.002000",
     "instructions": "Delivered to consignee - Code Verified delivery",
-    "destination": "Tirur",
+    "destination": null,
     "deliveryDate_v1": "Delivered on 11 Jun",
     "deliveryDate": "11 Jun 2026, Evening",
     "hqStatus": "Delivered",
